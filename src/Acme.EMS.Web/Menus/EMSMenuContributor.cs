@@ -5,7 +5,6 @@ using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
 using Volo.Abp.UI.Navigation;
-
 namespace Acme.EMS.Web.Menus;
 
 public class EMSMenuContributor : IMenuContributor
@@ -27,12 +26,26 @@ public class EMSMenuContributor : IMenuContributor
             0,
             new ApplicationMenuItem(
                 EMSMenus.Home,
-                l["Menu:Home"],
+                l["Menu:Home"], 
                 "~/",
                 icon: "fas fa-home",
                 order: 0
             )
         );
+        context.Menu.AddItem(
+    new ApplicationMenuItem(
+        "EMS",
+        l["Menu:EMS"],
+        icon: "fa fa-users"
+    ).AddItem(
+        new ApplicationMenuItem(
+            "EMS.Employees",
+            l["Menu:Employees"],
+            url: "/Employees"
+        )
+    )
+);
+
 
         if (MultiTenancyConsts.IsEnabled)
         {
